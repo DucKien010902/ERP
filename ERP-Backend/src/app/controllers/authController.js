@@ -30,7 +30,7 @@ class AuthController {
       return res.status(200).json({ message: 'Account found', token });
     } else {
       if (password != existingUser.password) {
-        return res.status(404).json({ message: 'Invalid passwork' });
+        return res.status(404).json({ message: 'Invalid password' });
       } else {
         return res.status(404).json({ message: 'Not correct role' });
       }
