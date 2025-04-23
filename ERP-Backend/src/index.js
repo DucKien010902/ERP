@@ -37,8 +37,19 @@ db.connect();
 const cors = require('cors');
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'E:/LOCAL STORE')));
-app.use(express.static('E:/LOCAL STORE'));
+app.use(
+  express.static(
+    path.join(
+      __dirname,
+      'C:/Users/Admin/OneDrive - Hanoi University of Science and Technology/Desktop/HOC TAP/ERP'
+    )
+  )
+);
+app.use(
+  express.static(
+    'C:/Users/Admin/OneDrive - Hanoi University of Science and Technology/Desktop/HOC TAP/ERP'
+  )
+);
 app.use(
   express.urlencoded({
     extended: true,
