@@ -1,0 +1,11 @@
+const express = require('express');
+const route = express.Router();
+const directory = require('../app/controllers/directoryController');
+const authMiddleware = require('../middlewares/authMiddleware');
+route.post('/creatdirectory', directory.AddDirectory);
+route.post('/deletedirectory', directory.DeleteDirectory);
+route.post('/addmember', directory.AddDirectoryMember);
+route.post('/removemember', directory.RemoveDirectoryMember);
+route.get('/getalldirectory', directory.GetAllDirectory);
+route.get('/getdirectorymembers', directory.GetDirectoryMember);
+module.exports = route;

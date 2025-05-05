@@ -4,11 +4,18 @@ const Schema = mongoose.Schema;
 
 const employees = new Schema({
   email: String,
+  role: String,
+  password: String,
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
   fullName: String,
-  employee_id: String,
+  position: String,
   phoneNumber: String,
   address: String,
-  field: String,
+  gender: String,
+  departments: String,
   salary: Number,
 });
 
