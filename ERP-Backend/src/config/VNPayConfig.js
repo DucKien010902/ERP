@@ -2,9 +2,9 @@ const crypto = require('crypto');
 
 const vnpayConfig = {
   vnp_PayUrl: 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html',
-  vnp_ReturnUrl: 'https://duckien.vercel.app/',
-  vnp_TmnCode: '8IM4MXV6',
-  vnp_HashSecret: '06B703V1V9ED1V573S5SY4P8T61JZIQQ',
+  vnp_ReturnUrl: 'https://duckien.vercel.app/product',
+  vnp_TmnCode: 'TMYGP979',
+  vnp_HashSecret: 'I4TNR0GOB4M5URF7XV9H627ADTI08AMW',
   vnp_ApiUrl: 'https://sandbox.vnpayment.vn/merchant_webapi/api/transaction',
 
   hmacSHA512: (key, data) => {
