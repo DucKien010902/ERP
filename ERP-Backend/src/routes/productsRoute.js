@@ -1,0 +1,12 @@
+const express = require('express');
+const route = express.Router();
+const productsController = require('../app/controllers/productController.js');
+const vnpayReturnController = require('../app/controllers/vnpayReturnController.js');
+route.get('/getallproducts', productsController.getallProducts);
+route.get('/getcarts', productsController.getCarts);
+route.get('/getpayurl', vnpayReturnController.generatePayURL);
+route.get('/getvnpay_return', vnpayReturnController.handleVnpayReturn);
+route.post('/addtocart', productsController.addtoCarts);
+route.post('/deletetocart', productsController.removeFromCart);
+route.post('/addproduct', productsController.addProduct);
+module.exports = route;

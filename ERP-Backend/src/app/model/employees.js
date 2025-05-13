@@ -17,6 +17,18 @@ const employees = new Schema({
   gender: String,
   departments: String,
   salary: Number,
+  university: String,
+  comefrom: String,
+  relation: String,
+  company: String,
+  highschool: String,
+  birthday: String,
+  family: String,
+  bio: String,
+  national: String,
+  action: [''],
+  avatarImage: String,
+  coverImage: String,
 });
 
 module.exports = mongoose.model('employees', employees);

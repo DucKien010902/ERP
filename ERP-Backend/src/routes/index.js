@@ -6,6 +6,7 @@ const Chat = require('./chatRoute');
 const Admin = require('./adminRoute');
 const Document = require('./documentRoute');
 const Directory = require('./directoryRoute');
+const Product = require('./productsRoute');
 function route(app) {
   app.use('/auth', Auth);
   app.use('/employee', Employee);
@@ -13,5 +14,6 @@ function route(app) {
   app.use('/admin', Admin);
   app.use('/document', Document);
   app.use('/directory', Directory);
+  app.use('/product', Product);
 }
 module.exports = route;

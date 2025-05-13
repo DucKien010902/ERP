@@ -26,13 +26,11 @@ class EmployeeController {
       const token = jwt.sign({ email: existingUser.email }, SECRET_KEY, {
         expiresIn: '1h',
       });
-      return res
-        .status(200)
-        .json({
-          message: 'Account found',
-          token,
-          fullName: existingUser.fullName,
-        });
+      return res.status(200).json({
+        message: 'Account found',
+        token,
+        userInfo: existingUser,
+      });
     } else {
       if (password != existingUser.password) {
         return res.status(404).json({ message: 'Invalid password' });
@@ -71,42 +69,65 @@ class EmployeeController {
   async updateAccount(req, res) {
     try {
       console.log(req.body);
-      const { email, fullName, employee_id, phoneNumber, address, field } =
-        req.body;
-      console.log(typeof employee_id);
+      const {
+        university,
+        address,
+        comefrom,
+        relation,
+        phone,
+        company,
+        highschool,
+        birthday,
+        gender,
+        family,
+        bio,
+        national,
+        action,
+        email,
+      } = req.body;
+      console.log('Toi day roi');
       const existingUser = await employees.findOne({ email });
       if (!existingUser) {
-        const newEmployees = new employees({
-          email,
-          fullName,
-          employee_id,
-          phoneNumber,
-          address,
-          field,
-        });
-        await newEmployees.save();
-        return res.status(200).json({ message: 'Tạo nhân viên thành công' });
       } else {
         // console.log(existingUser);
         await employees.updateOne(
           { email },
           {
             $set: {
-              // 🎯 Đúng cú pháp cập nhật
-              fullName,
-              employee_id,
-              phoneNumber,
+              university,
               address,
-              field,
+              comefrom,
+              relation,
+              phoneNumber: phone,
+              company,
+              highschool,
+              birthday,
+              gender,
+              family,
+              bio,
+              national,
+              action,
             },
           }
         );
         return res
           .status(200)
-          .json({ message: 'Cập nhật nhân viên thành công' });
+          .json({ message: 'Cập nhật thông tin thành công' });
       }
     } catch (error) {
       return res.status(500).json({ message: 'Loi he thong' });
+    }
+  }
+  async updateImage(req, res) {
+    try {
+      const { email, type, base64 } = req.body;
+      console.log(type, ': ', base64);
+      const existingUser = await employees.findOne({ email });
+      existingUser[type] = base64;
+      await existingUser.save();
+      return res.status(200).json({ message: 'Cap nhat anh thanh cong' });
+    } catch (error) {
+      return res.status(500).json({ message: 'Loi server' });
     }
   }
   async getAccount(req, res) {
