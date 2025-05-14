@@ -6,7 +6,6 @@ class VNPayController {
   async generatePayURL(req, res) {
     try {
       const { amount, bankCode } = req.query;
-
       const amountNumber = Number(amount);
       if (!amount || isNaN(amountNumber) || amountNumber <= 0) {
         return res.status(400).json({ message: 'Số tiền không hợp lệ' });
@@ -19,9 +18,10 @@ class VNPayController {
         .add(15, 'minutes')
         .format('YYYYMMDDHHmmss'); // Hết hạn sau 15 phút
       const ipAddr = vnpayConfig.getIpAddress(req);
-      console.log(ipAddr);
       const txnRef = vnpayConfig.getRandomNumber(8);
-
+      console.log(req.headers['x-forwarded-for']);
+      console.log(req.connection?.remoteAddress);
+      console.log(req.socket?.remoteAddress);
       const vnp_Params = {
         vnp_Version: '2.1.0',
         vnp_Command: 'pay',
@@ -53,9 +53,9 @@ class VNPayController {
         vnpayConfig.vnp_HashSecret,
         signData
       );
-      // console.log(vnp_Params);
-      // console.log(signData);
-      // console.log(secureHash);
+      console.log(vnp_Params);
+      console.log(signData);
+      console.log(secureHash);
       // Bước 4: Gắn chữ ký
       sortedParams.vnp_SecureHash = secureHash;
 
