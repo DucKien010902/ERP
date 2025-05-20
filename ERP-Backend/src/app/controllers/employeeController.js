@@ -5,7 +5,6 @@ const SECRET_KEY = process.env.DB_SECRETKEY;
 class EmployeeController {
   async check(req, res) {
     const { email, password, role } = req.body; // Lấy email và password từ body
-    console.log(email);
     const userAgent = req.headers['user-agent'];
     if (userAgent && userAgent.includes('PostmanRuntime')) {
       return res
@@ -22,7 +21,6 @@ class EmployeeController {
     if (!existingUser) {
       return res.status(400).json({ message: 'Not found account' });
     }
-    console.log(existingUser.role);
     if (password == existingUser.password && role == existingUser.role) {
       const token = jwt.sign({ email: existingUser.email }, SECRET_KEY, {
         expiresIn: '1h',
